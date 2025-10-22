@@ -108,7 +108,8 @@ The rest of the README contains benchmark plots and a comparison table showing e
 
 ### Problem and goals
 Given the continuous signal
-s(t) = 0.8·sin(2π·103t) + 1.0·sin(2π·107t) + 0.1·sin(2π·115t)
+
+$s(t) = 0.8·sin(2π\times103t) + 1.0·sin(2π\times107t) + 0.1·sin(2π\times115t)$
 
 Goals:
 - Resolve two main peaks separated by 4 Hz (103 Hz and 107 Hz).
@@ -117,28 +118,41 @@ Goals:
 ### Sampling parameter selection
 - Highest signal frequency: 115 Hz → Nyquist requires Fs > 230 Hz.
 - Chosen sampling rate: Fs = 500 Hz.
-- Frequency resolution target ≈ 0.1 Hz → theoretical N ≈ 5000. For FFT efficiency choose N = 4096.
+- Frequency resolution target $\approx 0.1$ Hz $\rightarrow$ theoretical $N\approx5000$. For FFT efficiency choose N = 4096.
 - With N = 4096:
-  - Δf = Fs / N ≈ 500 / 4096 ≈ 0.12207 Hz (sufficient to resolve 4 Hz separation)
+  - $\Delta f = Fs / N \approx 500 / 4096 \approx 0.122$ Hz, sufficient to resolve 4 Hz separation
   - Total acquisition time T = N / Fs = 4096 / 500 = 8.192 s
 
 ### Window selection and spectral leakage
-- Signal frequencies are not generally integer DFT bins → spectral leakage occurs.
-- Recommended window: Hann (Hanning)
-  - Formula: w[n] = 0.5 · (1 − cos(2π n / (N − 1))), n = 0..N−1
+- Signal frequencies are not generally integer DFT bins $\rightarrow$ spectral leakage occurs.
+- Use window: Hann (Hanning)
+  - Formula: $w[n] = 0.5\times(1 − cos(2π n / (N − 1))), n = 0, ..., N−1$
   - Rationale: good sidelobe suppression (reduces leakage that could mask weak tones); main lobe is slightly wider than rectangular but acceptable for this use case.
 
-### Amplitude calibration (scaling)
-- For real-valued tones, unwindowed amplitude approx: A ≈ 2·|X[k]|/N for k>0.
-- Hann window has coherent gain ≈ 0.5, so compensate:
-  - For k > 0: A ≈ 4·|X[k]| / N
+### Amplitude calibration
+- For real-valued tones, unwindowed amplitude approx: $A \approx 2|X[k]|/N, k>0$.
+- Hann window has coherent gain $\approx0.5$, so compensate:
+  - For k > 0: $A \approx 4|X[k]|/N$
   - Handle DC (k = 0) and Nyquist separately (different factors).
-- For more accurate amplitude estimates of closely spaced or non-bin-centered tones, consider spectral interpolation or peak-fitting in the frequency domain.
 
-### Final recommendations (summary)
+### Final design
 - Sampling rate: Fs = 500 Hz  
 - FFT length: N = 4096 
-- Frequency resolution: Δf ≈ 0.122 Hz  
+- Frequency resolution: $\Delta f \approx 0.122$ Hz  
 - Acquisition time: T = 8.192 s  
-- Window: Hann (apply before DFT/FFT)  
-- Amplitude correction: use A ≈ 4·|X[k]|/N for k>0 (to compensate Hann coherent gain)
+- Window: Hanning
+
+### Result Comparison
+ -  $N=2^{10}$
+    ![](./pic/N10.png)
+
+ -  $N=2^{12}$
+    ![](./pic/N12.png)  
+
+ -  $N=2^{14}$
+    ![](./pic/N14.png)
+
+ -  $N=2^{16}$
+    ![](./pic/N16.png)
+
+### Result Analysis
