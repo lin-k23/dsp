@@ -12,11 +12,11 @@ using Complex = std::complex<double>;
 /**
  * @brief Computes the DFT using the direct O(N^2) formula.
  */
-std::vector<Complex> dft(const std::vector<Complex>& x);
+std::vector<Complex> dft(const std::vector<Complex> &x);
 
 /**
  * @brief Computes the in-place Radix-2 DIT FFT (O(N log N)).
  */
-void fft(std::vector<Complex>& a);
+void fft(std::vector<Complex> &a);
 
 #endif // TRANSFORMS_H
