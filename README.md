@@ -143,6 +143,9 @@ Goals:
 - Window: Hanning
 
 ### Result Comparison
+
+#### CPP Implementation
+
  -  $N=2^{10}$
     ![](./pic/N10.png)
 
@@ -154,6 +157,14 @@ Goals:
 
  -  $N=2^{16}$
     ![](./pic/N16.png)
+
+#### MATLAB Analysis
+
+  ![](./pic/Figure_1.png)
+  *Use Different Windows*
+
+  ![](./pic/Figure_2.png)
+  *Use Different Fs(See Aliasing)*
 
 ### Result Analysis
 
