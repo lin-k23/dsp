@@ -1,5 +1,6 @@
 # DSP Course Design One
 
+Click [here](https://github.com/lin-k23/dsp) to see all in Github
 ## Program Description
 
 This project implements and compares two methods for computing the Discrete Fourier Transform (DFT):
