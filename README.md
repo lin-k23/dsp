@@ -156,3 +156,6 @@ Goals:
     ![](./pic/N16.png)
 
 ### Result Analysis
+
+- Analysis 1: All tested $N$ values are sufficient to resolve the 103 Hz, 107 Hz and 115Hz peaks. Increasing $N$ simply improves the precision of the frequency measurement while need more measure time.
+- Analysis 2: Hann window will successfully suppress the sidelobes. The spectrum floor will be low, and all three peaks (103, 107, and the weak 115 Hz) will be clearly visible and measurable.
